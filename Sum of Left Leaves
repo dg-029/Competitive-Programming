@@ -1,7 +1,7 @@
-# Sum of Left Leaves
+# **Sum of Left Leaves**
 Find the sum of all left leaves in a given binary tree.
 
-## Soln:
+## **Soln:**
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
