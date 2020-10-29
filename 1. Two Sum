@@ -1,0 +1,42 @@
+/**Problem
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Output: Because nums[0] + nums[1] == 9, we return [0, 1].
+*/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,vector<int> > s;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+            s[nums[i]].push_back(i);
+        vector<int> ans(2);
+        for(int i=0;i<n;i++){
+            ans[0]=i;
+            if(s.find(target-nums[i])!=s.end()){
+                if(nums[i]==target-nums[i]){
+                    if(s[nums[i]].size()>1){
+                        ans[1]=s[nums[i]][1];
+                        break;
+                    }
+                }
+                else{
+                    ans[1]=s[target-nums[i]][0];
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};
