@@ -1,0 +1,43 @@
+hacktoberfest-accepted
+Question Name - Summary Ranges
+
+You are given a sorted unique integer array nums.
+
+Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.
+
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& a) {
+        vector<string>res;
+				int n = a.size();
+				if(n==0)
+				{
+					return res;
+				}
+
+				int prev = a[0];
+
+				for(int i = 1;i<a.size();i++)
+				{
+					if(a[i]!=a[i-1]+1)
+					{
+						if(prev==a[i-1])
+						{
+							res.push_back(to_string(prev));
+						}
+						else{
+							res.push_back(to_string(prev)+"->"+to_string(a[i-1]));
+						}
+						prev = a[i];
+					}
+				}
+				if(prev!=a[a.size()-1])
+				{
+					res.push_back(to_string(prev)+"->"+to_string(a[a.size()-1]));        
+				}
+				else{
+					res.push_back(to_string(prev));
+				}
+				return res;
+    }
+};
