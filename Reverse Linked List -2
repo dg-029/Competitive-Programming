@@ -1,0 +1,54 @@
+Reverse a linked list from position m to n. Do it in one-pass.
+
+Solution:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverse(ListNode* head,int k)
+    {
+        int count=0;
+        ListNode* prev=NULL;
+        ListNode* next=NULL;
+        ListNode* current=head;
+        while(current && count<=k)
+        {
+            next=current->next;
+            current->next=prev;
+            prev=current;
+            current=next;
+            count++;
+        }
+        
+        head->next=current;
+        return prev;
+    }
+    ListNode* reverseBetween(ListNode* head, int m, int n) {
+       if(head==NULL || head->next==NULL)
+           return head;
+        int k=n-m;
+        ListNode* start=head;
+        ListNode* tail=NULL;
+        m--;
+        while(m-- && start)
+        {
+            tail=start;
+            start=start->next;
+        }
+        
+        if(tail)
+            tail->next=reverse(start,k);
+        else
+            head=reverse(start,k);
+        
+        return head;
+    }
+};
